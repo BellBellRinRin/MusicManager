@@ -1,0 +1,140 @@
+@charset "UTF-8";
+
+.table-wrapper {
+    overflow-x: auto;
+    max-height: 70vh;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1000px;
+}
+
+.data-table thead th {
+    background: #f9fafb;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding: 12px 8px;
+    text-align: left;
+    font-weight: 700;
+    color: var(--text-sub);
+    font-size: 0.85rem;
+    border-bottom: 2px solid #e5e7eb;
+    user-select: none; /* テキスト選択防止 */
+}
+
+/* --- ソート可能なヘッダーのスタイル (New!) --- */
+.data-table thead th.sortable {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.data-table thead th.sortable:hover {
+    background-color: #e5e7eb;
+}
+
+.sort-icon {
+    display: inline-block;
+    width: 12px;
+    text-align: center;
+    color: var(--primary-color);
+    margin-left: 4px;
+}
+
+/* --- ここまで --- */
+
+.data-table tbody tr {
+    border-bottom: 1px solid #f3f4f6;
+    transition: background 0.1s;
+}
+
+.data-table tbody tr:hover {
+    background-color: #f3f4f6;
+}
+
+.data-table td {
+    padding: 8px;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    vertical-align: middle;
+}
+
+/* 列幅 */
+.col-art { width: 60px; text-align: center; }
+.col-play { width: 50px; text-align: center; }
+.col-track { width: 50px; text-align: center; }
+.col-time { width: 60px; text-align: center; font-family: monospace; }
+.col-action { width: 140px; text-align: center; }
+th.col-action { text-align: center; }
+
+/* サムネイル */
+.thumb-art {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+    background: #e5e7eb;
+}
+
+/* 編集セル */
+.editable {
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 4px 6px;
+    transition: border-color 0.2s;
+}
+.editable:hover {
+    border-color: #d1d5db;
+}
+
+.inline-input {
+    width: 100%;
+    padding: 4px;
+    font-size: 0.9rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 4px;
+    outline: none;
+}
+
+/* ボタン類 */
+.btn-play, .btn-stop {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-play:hover { color: #4338ca; }
+
+.action-btns {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.btn-icon {
+    background: #f3f4f6;
+    border: none;
+    border-radius: 6px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-sub);
+    transition: all 0.2s;
+}
+.btn-icon:hover {
+    background: #e5e7eb;
+    color: var(--text-main);
+}
+.btn-icon.delete:hover {
+    background: #fee2e2;
+    color: var(--youtube-color);
+}

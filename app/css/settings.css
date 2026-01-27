@@ -1,0 +1,92 @@
+.settings-container {
+    background: #fff;
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: var(--shadow-md);
+    max-width: 700px; /* 幅を広げる */
+    margin: 0 auto;
+}
+
+.settings-section {
+    margin-bottom: 24px;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 8px;
+}
+
+.form-group { margin-bottom: 16px; }
+.form-group label {
+    display: block; font-weight: 700; margin-bottom: 8px; color: var(--text-main);
+}
+.form-group input[type="number"] {
+    width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;
+}
+.form-desc { font-size: 0.85rem; color: var(--text-sub); margin-top: 4px; }
+
+/* Tag Settings */
+.tag-control-area {
+    margin-bottom: 12px;
+    display: flex; flex-direction: column; gap: 4px;
+}
+.tag-control-area select {
+    padding: 8px; border: 1px solid #d1d5db; border-radius: 6px; flex: 1;
+}
+
+.btn-small {
+    background: var(--primary-color); color: white; border: none; padding: 6px 12px;
+    border-radius: 6px; cursor: pointer; font-weight: 700;
+}
+.btn-small:hover { background: var(--primary-color-dark); }
+
+.tag-list-header {
+    display: grid; grid-template-columns: 2fr 1fr 60px; gap: 8px;
+    font-size: 0.85rem; color: var(--text-sub); padding: 4px 8px; font-weight: 700;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.tag-list {
+    list-style: none; padding: 0; margin: 0;
+    border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px;
+}
+.tag-item {
+    display: grid; grid-template-columns: 2fr 1fr 60px; gap: 8px;
+    padding: 10px 8px; border-bottom: 1px solid #f3f4f6;
+    align-items: center; background: #fff;
+}
+.tag-item.sortable-drag { opacity: 0; } /* DnD時 */
+.tag-item:last-child { border-bottom: none; }
+
+.handle { cursor: grab; display: flex; align-items: center; gap: 8px; font-weight: 700; }
+.handle svg { width: 16px; height: 16px; color: #9ca3af; }
+.handle.disabled { cursor: default; color: var(--text-main); }
+.handle.disabled svg { display: none; }
+
+.check-container { display: flex; justify-content: center; }
+.del-btn-area { display: flex; justify-content: center; }
+.btn-del {
+    background: #fee2e2; color: #ef4444; border: none; border-radius: 4px;
+    padding: 4px 8px; cursor: pointer; font-size: 0.8rem;
+}
+.btn-del:hover { background: #ef4444; color: white; }
+
+.form-actions { text-align: center; margin-top: 32px; display: flex; justify-content: center; gap: 16px; }
+.btn-save {
+    background: var(--primary-color); color: white; border: none; padding: 12px 32px;
+    border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 1rem;
+}
+.btn-save:hover { background: var(--primary-color-dark); }
+
+.toast {
+    visibility: hidden; min-width: 300px; background-color: #333; color: #fff; text-align: center;
+    border-radius: 12px; padding: 16px; position: fixed; z-index: 3000; right: 30px; top: 30px;
+    font-weight: 700; opacity: 0; transition: 0.5s;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+.toast.show { visibility: visible; opacity: 1; top: 50px; }
+.toast.success { background-color: #059669; }
+.toast.error { background-color: #ef4444; }

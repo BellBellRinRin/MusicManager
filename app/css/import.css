@@ -1,0 +1,160 @@
+@charset "UTF-8";
+
+/* --- インポート画面コンテナ --- */
+.import-container {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: var(--shadow-md);
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* --- 大きなドロップゾーン --- */
+.import-drop {
+    border: 3px dashed #d1d5db;
+    border-radius: 16px;
+    background-color: #f9fafb;
+    padding: 60px 20px;
+    margin-bottom: 32px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: block;
+}
+
+.import-drop:hover, .import-drop.dragover {
+    border-color: var(--primary-color);
+    background-color: #eef2ff;
+}
+
+.icon-circle {
+    width: 80px;
+    height: 80px;
+    background: #e5e7eb;
+    border-radius: 50%;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+}
+.import-drop:hover .icon-circle {
+    background: #c7d2fe;
+    color: var(--primary-color);
+}
+.icon-circle svg {
+    width: 40px;
+    height: 40px;
+}
+
+.drop-text-main {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 8px;
+}
+.drop-text-sub {
+    font-size: 0.9rem;
+    color: var(--text-sub);
+}
+
+/* --- インポート実行ボタン --- */
+.btn-import {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 16px 48px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2);
+}
+.btn-import:hover:not(:disabled) {
+    background-color: #4338ca;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(79, 70, 229, 0.3);
+}
+.btn-import:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+.btn-import svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* --- ログ表示エリア --- */
+.log-area {
+    margin-top: 32px;
+    text-align: left;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 20px;
+}
+.log-area h3 {
+    font-size: 1rem;
+    color: var(--text-main);
+    margin-bottom: 12px;
+}
+.log-area ul {
+    list-style: none;
+    max-height: 200px;
+    overflow-y: auto;
+    background: #1f2937;
+    color: #f3f4f6;
+    padding: 16px;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+.log-area li {
+    margin-bottom: 4px;
+    border-bottom: 1px solid #374151;
+    padding-bottom: 2px;
+}
+.log-success { color: #34d399; }
+.log-error { color: #f87171; }
+.log-info { color: #60a5fa; }
+
+/* --- トースト通知 (New!) --- */
+.toast {
+    visibility: hidden;
+    min-width: 300px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 12px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1000;
+    right: 30px;
+    top: 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, top 0.5s ease-in-out;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+    top: 50px; /* 少し下にスライドする演出 */
+}
+
+/* 成功時の色 (Green) */
+.toast.success {
+    background-color: #059669;
+}
+
+/* エラー時の色 (Red) */
+.toast.error {
+    background-color: #ef4444;
+}

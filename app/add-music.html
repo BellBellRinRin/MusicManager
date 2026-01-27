@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>曲を追加 - Music Management</title>
+    <!-- 共通スタイルと追加画面用スタイルを参照 -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/add-music.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <script src="js/theme_head.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <!-- ヘッダーエリア -->
+        <header class="header form-header">
+            <div class="header-left">
+                <!-- 戻るボタン -->
+                <a href="index.html" class="back-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                    </svg>
+                    トップへ戻る
+                </a>
+            </div>
+            <h1>曲を追加</h1>
+            <p class="subtitle">ライブラリに新しい楽曲を登録します</p>
+        </header>
+
+        <form class="add-form" id="addMusicForm">
+            <!-- 上段：アートワークと基本情報 -->
+            <div class="form-grid">
+                
+                <!-- アルバムアート -->
+                <div class="artwork-section">
+                    <label class="section-label">アルバムアート</label>
+                    <label class="drop-zone artwork-drop" id="artworkDropZone">
+                        <input type="file" id="artworkInput" accept="image/*" style="display: none;">
+                        <div class="drop-content" id="artworkContent">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="drop-icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                            </svg>
+                            <p class="drop-text">画像をドラッグ＆ドロップ<br>または <span class="browse-btn">クリックして参照</span></p>
+                        </div>
+                        <img id="artworkPreview" class="artwork-preview" src="" alt="Album Art Preview" style="display: none;">
+                        <button type="button" id="removeArtwork" class="remove-btn" style="display: none;">×</button>
+                    </label>
+                </div>
+
+                <!-- テキスト入力フィールド群 -->
+                <div class="info-section">
+                    <div class="form-group">
+                        <label for="title">曲名 <span class="required">*</span></label>
+                        <input type="text" id="title" placeholder="楽曲のタイトル" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="artist">アーティスト <span class="required">*</span></label>
+                        <input type="text" id="artist" placeholder="アーティスト名" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="album">アルバム</label>
+                        <input type="text" id="album" placeholder="収録アルバム名">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="genre">ジャンル</label>
+                            <input type="text" id="genre" placeholder="Pop, Rock, Jazz...">
+                        </div>
+                        <div class="form-group small">
+                            <label for="track">トラックNo</label>
+                            <input type="number" id="track" min="1" placeholder="1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 下段：ファイルパス -->
+            <div class="file-section">
+                <label class="section-label">楽曲ファイル <span class="required">*</span></label>
+                <label class="drop-zone file-drop" id="fileDropZone">
+                    <input type="file" id="fileInput" accept="audio/*,video/*" style="display: none;">
+                    <div class="drop-content-horizontal">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="drop-icon-sm">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                        </svg>
+                        <div class="file-info-text">
+                            <p class="drop-text-main" id="fileName">音声・動画ファイルをドラッグ＆ドロップ</p>
+                            <p class="drop-text-sub">または <span class="browse-link">クリックして参照</span></p>
+                        </div>
+                    </div>
+                </label>
+            </div>
+
+            <!-- アクションボタン -->
+            <div class="form-actions">
+                <button type="submit" class="btn-submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                    ライブラリに追加
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- トースト通知 -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Eelと固有JSを参照 -->
+    <script type="text/javascript" src="/eel.js"></script>
+    <script src="js/add-music.js"></script>
+    <script src="js/theme.js"></script>
+</body>
+</html>

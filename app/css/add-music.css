@@ -1,0 +1,262 @@
+@charset "UTF-8";
+
+/* (既存のスタイル...省略なしで記載します) */
+
+/* ヘッダー周りはstyle.cssに移動済み */
+
+/* --- フォームレイアウト --- */
+.add-form {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: var(--shadow-md);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 32px;
+    margin-bottom: 32px;
+}
+
+/* 共通パーツ */
+.section-label {
+    display: block;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    color: var(--text-main);
+}
+.required {
+    color: var(--youtube-color);
+    margin-left: 2px;
+}
+
+/* --- ドロップゾーン共通設定 --- */
+.drop-zone {
+    border: 2px dashed #d1d5db;
+    border-radius: 12px;
+    background-color: #f9fafb;
+    transition: all 0.2s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    display: block;
+}
+.drop-zone:hover, .drop-zone.dragover {
+    border-color: var(--primary-color);
+    background-color: #eef2ff;
+}
+
+/* アートワーク用 */
+.artwork-drop {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 16px;
+}
+
+.drop-icon {
+    width: 48px;
+    height: 48px;
+    color: #9ca3af;
+    margin-bottom: 12px;
+}
+.drop-text {
+    font-size: 0.85rem;
+    color: var(--text-sub);
+    line-height: 1.5;
+}
+.browse-btn {
+    color: var(--primary-color);
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+/* プレビュー画像 */
+.artwork-preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 10;
+    border-radius: 10px;
+}
+/* 画像削除ボタン */
+.remove-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 20;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    line-height: 24px;
+    font-size: 16px;
+}
+.remove-btn:hover {
+    background: rgba(0,0,0,0.8);
+}
+
+/* --- 入力フィールド --- */
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-sub);
+    margin-bottom: 6px;
+}
+.form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--text-main);
+    background: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+.form-group input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.form-row {
+    display: flex;
+    gap: 16px;
+}
+.form-group.small {
+    width: 120px;
+    flex-shrink: 0;
+}
+
+/* --- ファイルパスエリア --- */
+.file-drop {
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 32px;
+}
+.drop-content-horizontal {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.drop-icon-sm {
+    width: 32px;
+    height: 32px;
+    color: var(--text-sub);
+}
+.file-info-text {
+    text-align: left;
+}
+.drop-text-main {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text-main);
+}
+.drop-text-sub {
+    font-size: 0.85rem;
+    color: var(--text-sub);
+}
+.browse-link {
+    color: var(--primary-color);
+    cursor: pointer;
+    font-weight: 700;
+}
+
+/* --- 送信ボタン --- */
+.form-actions {
+    text-align: center;
+}
+.btn-submit {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 14px 40px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s, transform 0.1s;
+    box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2);
+}
+.btn-submit svg {
+    width: 24px;
+    height: 24px;
+}
+.btn-submit:hover {
+    background-color: #4338ca;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(79, 70, 229, 0.3);
+}
+.btn-submit:active {
+    transform: translateY(0);
+}
+.btn-submit:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    .artwork-section {
+        max-width: 240px;
+        margin: 0 auto 32px auto;
+    }
+}
+
+/* --- トースト通知 (New!) --- */
+.toast {
+    visibility: hidden;
+    min-width: 300px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 12px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1000;
+    right: 30px;
+    top: 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, top 0.5s ease-in-out;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+    top: 50px;
+}
+
+.toast.success { background-color: #059669; }
+.toast.error { background-color: #ef4444; }

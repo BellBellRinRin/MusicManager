@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+/* --- Body リセット (style.cssの共通設定を上書き) --- */
+body {
+    /* 共通CSSのpadding:20pxとflexレイアウトをこの画面でのみ無効化 */
+    padding: 0 !important;
+    display: block !important;
+    height: 100vh;
+    overflow: hidden; /* Body自体のスクロールを禁止 */
+}
+
+/* --- 全体レイアウト --- */
+.container-fluid.app-layout {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* 画面の高さに強制 */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* コンテナのはみ出し防止 */
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+/* --- メインコンテンツエリア (2カラム部分) --- */
+.main-content {
+    display: flex;
+    flex: 1; /* ヘッダー以外の残りの高さを占める */
+    width: 100%;
+    min-height: 0; /* ★重要: Flexアイテムが中身に合わせて伸びるのを防ぐ */
+    overflow: hidden; /* 内部でスクロールさせるため、ここは隠す */
+}
+
+/* --- ローディング画面 (Z-index最優先) --- */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(2px);
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #e5e7eb;
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 16px;
+}
+
+.loading-text {
+    color: var(--text-main);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

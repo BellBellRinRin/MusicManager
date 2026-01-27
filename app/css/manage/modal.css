@@ -1,0 +1,109 @@
+@charset "UTF-8";
+
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0; visibility: hidden;
+    transition: all 0.3s;
+}
+.modal-overlay.show { opacity: 1; visibility: visible; }
+
+.modal-content {
+    background: #fff;
+    padding: 32px;
+    border-radius: 16px;
+    width: 90%; max-width: 400px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.btn-close-x {
+    position: absolute;
+    top: 12px; right: 12px;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: #9ca3af;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+}
+.btn-close-x:hover { background-color: #ef4444; color: white; }
+.btn-close-x svg { width: 20px; height: 20px; }
+
+.art-preview-area {
+    margin: 20px 0;
+    display: flex; flex-direction: column; align-items: center;
+}
+.art-preview-area img {
+    width: 150px; height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
+    background: #f3f4f6;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 8px;
+}
+
+.art-actions {
+    display: flex; flex-direction: column; gap: 12px;
+    align-items: center; margin-bottom: 24px; width: 100%;
+}
+
+.btn-select-art {
+    background: var(--primary-color);
+    color: white;
+    padding: 10px 0; width: 80%;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-align: center;
+    transition: background 0.2s;
+}
+.btn-select-art:hover { background-color: #4338ca; }
+
+.btn-delete-art {
+    background: #fee2e2; color: #ef4444;
+    padding: 10px 0; width: 80%;
+    border-radius: 8px; border: none;
+    cursor: pointer;
+    font-weight: 700; font-size: 0.9rem;
+    transition: all 0.2s;
+}
+.btn-delete-art:hover { background-color: #ef4444; color: white; }
+
+.modal-buttons { display: flex; justify-content: space-between; gap: 12px; }
+.btn-cancel, .btn-save, .btn-delete-exec {
+    flex: 1; padding: 10px; border-radius: 8px; border: none; font-weight: 700; cursor: pointer;
+}
+.btn-cancel { background: #f3f4f6; color: var(--text-main); }
+.btn-save { background: var(--primary-color); color: white; }
+.btn-delete-exec { background: var(--youtube-color); color: white; }
+
+.toast {
+    visibility: hidden;
+    min-width: 300px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 12px;
+    padding: 16px;
+    position: fixed;
+    z-index: 3000;
+    right: 30px; top: 30px;
+    font-weight: 700;
+    opacity: 0;
+    transition: 0.5s;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+.toast.show { visibility: visible; opacity: 1; top: 50px; }
+.toast.success { background-color: #059669; }
+.toast.error { background-color: #ef4444; }

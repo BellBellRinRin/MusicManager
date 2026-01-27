@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>データベース管理 - Music Management</title>
+    <!-- 共通スタイル -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 分割した管理画面用スタイル -->
+    <link rel="stylesheet" href="css/manage/layout.css">
+    <link rel="stylesheet" href="css/manage/table.css">
+    <link rel="stylesheet" href="css/manage/player.css">
+    <link rel="stylesheet" href="css/manage/modal.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <script src="js/theme_head.js"></script>
+</head>
+<body>
+
+    <div class="container-fluid">
+        <header class="header form-header">
+            <div class="header-left">
+                <a href="index.html" class="back-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                    </svg>
+                    トップへ戻る
+                </a>
+            </div>
+            <h1>データベース管理</h1>
+            <p class="subtitle">楽曲情報の編集・削除・アートワークの管理</p>
+        </header>
+
+        <main class="manage-container">
+            <div class="table-wrapper">
+                <table class="data-table" id="musicTable">
+                    <thead>
+                        <tr id="tableHeaderRow"></tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+
+            <!-- ページネーション -->
+            <div id="paginationControl" class="pagination-container"></div>
+        </main>
+    </div>
+
+    <!-- プレイヤーバー -->
+    <div id="playerBar" class="player-bar">
+        <div class="seek-wrapper">
+            <input type="range" id="seekBar" class="seek-range" value="0" min="0" max="1000">
+        </div>
+        <div class="player-content">
+            <div class="player-art-wrapper">
+                <img id="playerArt" src="icon/MusicManager.png" alt="Art">
+            </div>
+            <div class="player-info">
+                <div class="info-row main">
+                    <span id="playerTitle" class="p-title">Title</span>
+                    <span class="p-divider">-</span>
+                    <span id="playerArtist" class="p-artist">Artist</span>
+                </div>
+                <div class="info-row sub" id="playerSubInfo"></div>
+            </div>
+            <div class="player-controls">
+                <span id="playerTimeDisplay" class="time-display">0:00 / 0:00</span>
+                <button id="barPlayBtn" class="btn-bar-play">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- アートワーク編集モーダル -->
+    <div id="artModal" class="modal-overlay">
+        <div class="modal-content art-modal">
+            <button id="btnCloseArtModalX" class="btn-close-x">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <h3>アルバムアート編集</h3>
+            <div class="art-preview-area">
+                <img id="currentArtPreview" src="" alt="Current Art">
+                <p id="artStatusText">現在の画像</p>
+            </div>
+            <div class="art-actions">
+                <label class="btn-select-art">
+                    <input type="file" id="newArtInput" accept="image/*" hidden>
+                    新しい画像を選択
+                </label>
+                <button id="btnExecRemoveArt" class="btn-delete-art">
+                    アートワークを削除
+                </button>
+            </div>
+            <div class="modal-buttons">
+                <button id="btnCancelArt" class="btn-cancel">キャンセル</button>
+                <button id="btnSaveArt" class="btn-save">変更を保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 削除確認モーダル -->
+    <div id="deleteModal" class="modal-overlay">
+        <div class="modal-content delete-modal">
+            <h3>楽曲の削除</h3>
+            <p>ライブラリとファイルから完全に削除されます。<br>この操作は取り消せません。</p>
+            <p class="delete-target-name" id="deleteTargetName"></p>
+            <div class="modal-buttons">
+                <button id="btnCancelDelete" class="btn-cancel">キャンセル</button>
+                <button id="btnExecDelete" class="btn-delete-exec">削除する</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ローディングオーバーレイ -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="spinner"></div>
+        <p class="loading-text">データを処理しています...</p>
+        <!-- ★追加: 具体的な進捗表示用 -->
+        <p id="loadingDetail" style="margin-top: 8px; color: var(--text-sub); font-family: monospace;">準備中...</p>
+    </div>
+
+    <!-- トースト通知 -->
+    <div id="toast" class="toast"></div>
+
+    <!-- オーディオ要素 -->
+    <audio id="previewPlayer"></audio>
+
+    <script type="text/javascript" src="/eel.js"></script>
+    
+    <!-- 分割したJS -->
+    <script src="js/manage/globals.js"></script>
+    <script src="js/manage/utils.js"></script>
+    <script src="js/manage/player.js"></script>
+    <script src="js/manage/modal.js"></script>
+    <script src="js/manage/table.js"></script>
+    <script src="js/manage/main.js"></script>
+    
+    <script src="js/theme.js"></script>
+</body>
+</html>
