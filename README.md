@@ -78,6 +78,10 @@ userfiles/music.jsonは楽曲を追加するごとにランダムな文字列の
 
 ご依頼いただいた文章を各言語に翻訳いたしました。
 
+-- これは原文です --
+
+***
+
 # English
 ## About this App
 This is a Windows-exclusive application called MusicManager. In v1.0.0-beta1, only the portable version is supported, which can be used immediately after extracting the zip file.
